@@ -29,15 +29,6 @@ PRETRAINED_VOCAB_FILES_MAP = {
     }
 }
 
-PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES = {
-    "{{cookiecutter.checkpoint_identifier}}": 512,
-}
-
-
-PRETRAINED_INIT_CONFIGURATION = {
-    "{{cookiecutter.checkpoint_identifier}}": {"do_lower_case": False},
-}
-
 
 class {{cookiecutter.camelcase_modelname}}Tokenizer(BertTokenizer):
     r"""
@@ -52,8 +43,6 @@ class {{cookiecutter.camelcase_modelname}}Tokenizer(BertTokenizer):
 
     vocab_files_names = VOCAB_FILES_NAMES
     pretrained_vocab_files_map = PRETRAINED_VOCAB_FILES_MAP
-    max_model_input_sizes = PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES
-    pretrained_init_configuration = PRETRAINED_INIT_CONFIGURATION
 
 {%- elif cookiecutter.tokenizer_type == "Based on BART" %}
 from ...utils import logging

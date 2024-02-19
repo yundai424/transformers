@@ -30,15 +30,6 @@ PRETRAINED_VOCAB_FILES_MAP = {
     }
 }
 
-PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES = {
-    "{{cookiecutter.checkpoint_identifier}}": 512,
-}
-
-
-PRETRAINED_INIT_CONFIGURATION = {
-    "{{cookiecutter.checkpoint_identifier}}": {"do_lower_case": False},
-}
-
 
 class {{cookiecutter.camelcase_modelname}}TokenizerFast(BertTokenizerFast):
     r"""
@@ -53,8 +44,6 @@ class {{cookiecutter.camelcase_modelname}}TokenizerFast(BertTokenizerFast):
 
     vocab_files_names = VOCAB_FILES_NAMES
     pretrained_vocab_files_map = PRETRAINED_VOCAB_FILES_MAP
-    max_model_input_sizes = PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES
-    pretrained_init_configuration = PRETRAINED_INIT_CONFIGURATION
     slow_tokenizer_class = {{cookiecutter.camelcase_modelname}}Tokenizer
 
 {%- elif cookiecutter.tokenizer_type == "Based on BART" %}
