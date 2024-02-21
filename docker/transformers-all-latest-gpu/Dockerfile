@@ -48,7 +48,7 @@ RUN python3 -m pip install -U "itsdangerous<2.1.0"
 
 RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/accelerate@main#egg=accelerate
 
-#RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/peft@main#egg=peft
+RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/peft@main#egg=peft
 
 ## Add bitsandbytes for mixed int8 testing
 #RUN python3 -m pip install --no-cache-dir bitsandbytes
@@ -71,8 +71,8 @@ RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/acc
 # For video model testing
 RUN python3 -m pip install --no-cache-dir decord av==9.2.0
 
-## For `dinat` model
-#RUN python3 -m pip install --no-cache-dir 'natten<0.15.0' -f https://shi-labs.com/natten/wheels/$CUDA/
+# For `dinat` model
+RUN python3 -m pip install --no-cache-dir 'natten<0.15.0' -f https://shi-labs.com/natten/wheels/$CUDA/
 
 # For `nougat` tokenizer
 RUN python3 -m pip install --no-cache-dir python-Levenshtein
