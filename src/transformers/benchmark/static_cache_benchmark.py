@@ -96,7 +96,11 @@ class StaticCacheBenchMark(BenchMark):
             input_ids = sample(outputs[0], temperature=0.6, top_k=5)[0]
             generated_ids[:, 0] = input_ids[:, 0]
 
+        _input_ids = input_ids
+
         def target():
+
+            input_ids = _input_ids
 
             torch.cuda.synchronize()
 
