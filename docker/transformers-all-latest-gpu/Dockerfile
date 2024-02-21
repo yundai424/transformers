@@ -23,19 +23,19 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip
 ARG REF=main
 RUN git clone https://github.com/huggingface/transformers && cd transformers && git checkout $REF
 
-# TODO: Handle these in a python utility script
-RUN [ ${#PYTORCH} -gt 0 -a "$PYTORCH" != "pre" ] && VERSION='torch=='$PYTORCH'.*' ||  VERSION='torch'; echo "export VERSION='$VERSION'" >> ~/.profile
-RUN echo torch=$VERSION
-# `torchvision` and `torchaudio` should be installed along with `torch`, especially for nightly build.
-# Currently, let's just use their latest releases (when `torch` is installed with a release version)
-# TODO: We might need to specify proper versions that work with a specific torch version (especially for past CI).
-RUN [ "$PYTORCH" != "pre" ] && python3 -m pip install --no-cache-dir -U $VERSION torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/$CUDA || python3 -m pip install --no-cache-dir -U --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/$CUDA
+## TODO: Handle these in a python utility script
+#RUN [ ${#PYTORCH} -gt 0 -a "$PYTORCH" != "pre" ] && VERSION='torch=='$PYTORCH'.*' ||  VERSION='torch'; echo "export VERSION='$VERSION'" >> ~/.profile
+#RUN echo torch=$VERSION
+## `torchvision` and `torchaudio` should be installed along with `torch`, especially for nightly build.
+## Currently, let's just use their latest releases (when `torch` is installed with a release version)
+## TODO: We might need to specify proper versions that work with a specific torch version (especially for past CI).
+#RUN [ "$PYTORCH" != "pre" ] && python3 -m pip install --no-cache-dir -U $VERSION torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/$CUDA || python3 -m pip install --no-cache-dir -U --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/$CUDA
 
 RUN python3 -m pip install --no-cache-dir -U tensorflow==2.13 protobuf==3.20.3 tensorflow_text tensorflow_probability
 
 RUN python3 -m pip install --no-cache-dir -e ./transformers[dev,onnxruntime]
 
-RUN python3 -m pip install --no-cache-dir -U torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+RUN python3 -m pip uninstall torch torchvision torchaudio && python3 -m pip install --no-cache-dir -U torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 RUN python3 -m pip uninstall -y flax jax
 
@@ -48,31 +48,31 @@ RUN python3 -m pip install -U "itsdangerous<2.1.0"
 
 RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/accelerate@main#egg=accelerate
 
-RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/peft@main#egg=peft
+#RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/peft@main#egg=peft
 
-# Add bitsandbytes for mixed int8 testing
-RUN python3 -m pip install --no-cache-dir bitsandbytes
+## Add bitsandbytes for mixed int8 testing
+#RUN python3 -m pip install --no-cache-dir bitsandbytes
 
-# Add auto-gptq for gtpq quantization testing
-RUN python3 -m pip install --no-cache-dir auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu118/
+## Add auto-gptq for gtpq quantization testing
+#RUN python3 -m pip install --no-cache-dir auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu118/
 
-# Add einops for additional model testing
-RUN python3 -m pip install --no-cache-dir einops
+## Add einops for additional model testing
+#RUN python3 -m pip install --no-cache-dir einops
 
 ## Add aqlm for quantization testing
 #RUN python3 -m pip install --no-cache-dir aqlm[gpu]==1.0.1
 
-# Add autoawq for quantization testing
-RUN python3 -m pip install --no-cache-dir https://github.com/casper-hansen/AutoAWQ/releases/download/v0.1.8/autoawq-0.1.8+cu118-cp38-cp38-linux_x86_64.whl
+## Add autoawq for quantization testing
+#RUN python3 -m pip install --no-cache-dir https://github.com/casper-hansen/AutoAWQ/releases/download/v0.1.8/autoawq-0.1.8+cu118-cp38-cp38-linux_x86_64.whl
 
-# For bettertransformer + gptq
-RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/optimum@main#egg=optimum
+## For bettertransformer + gptq
+#RUN python3 -m pip install --no-cache-dir git+https://github.com/huggingface/optimum@main#egg=optimum
 
 # For video model testing
 RUN python3 -m pip install --no-cache-dir decord av==9.2.0
 
-# For `dinat` model
-RUN python3 -m pip install --no-cache-dir 'natten<0.15.0' -f https://shi-labs.com/natten/wheels/$CUDA/
+## For `dinat` model
+#RUN python3 -m pip install --no-cache-dir 'natten<0.15.0' -f https://shi-labs.com/natten/wheels/$CUDA/
 
 # For `nougat` tokenizer
 RUN python3 -m pip install --no-cache-dir python-Levenshtein
