@@ -35,6 +35,8 @@ RUN python3 -m pip install --no-cache-dir -U tensorflow==2.13 protobuf==3.20.3 t
 
 RUN python3 -m pip install --no-cache-dir -e ./transformers[dev,onnxruntime]
 
+RUN python3 -m pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
 RUN python3 -m pip uninstall -y flax jax
 
 RUN python3 -m pip install --no-cache-dir intel_extension_for_pytorch==$INTEL_TORCH_EXT -f https://developer.intel.com/ipex-whl-stable-cpu
