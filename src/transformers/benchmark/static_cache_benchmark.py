@@ -106,7 +106,7 @@ class StaticCacheBenchMark(BenchMark):
 
             with torch.no_grad():
 
-                for i in range(1, self.num_iter + 1):
+                for i in range(1, self.num_iter):
                     outputs = compiled_model(input_ids, return_dict=False, use_cache=True)
                     input_ids = sample(outputs[0], temperature=0.6, top_k=5)[0]
                     generated_ids[:, i] = input_ids[:, 0]
