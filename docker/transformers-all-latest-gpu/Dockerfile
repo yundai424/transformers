@@ -9,9 +9,9 @@ SHELL ["sh", "-lc"]
 # The following `ARG` are mainly used to specify the versions explicitly & directly in this docker file, and not meant
 # to be used as arguments for docker build (so far).
 
-ARG PYTORCH='2.1.1'
+ARG PYTORCH='2.2.0'
 # (not always a valid torch version)
-ARG INTEL_TORCH_EXT='2.1.100'
+ARG INTEL_TORCH_EXT='2.2.0'
 # Example: `cu102`, `cu113`, etc.
 ARG CUDA='cu118'
 
